@@ -1,0 +1,87 @@
+server:
+  port: 9001
+  error:
+    includeStackTrace: never
+#  ribbon:
+#    ReadTimeout: 60000
+#    ConnectTimeout: 20000
+#    eureka:
+#      enabled: false
+#    ServerListRefreshInterval: 1000
+
+eureka:
+  client:
+    registerWithEureka: true
+    fetchRegistry: true
+    serviceUrl:
+      defaultZone: http://localhost:9000/eureka
+    healthcheck:
+      enabled: true
+
+spring:
+  application:
+    name: api-gateway
+#  cloud:
+#    loadbalancer:
+#      retry:
+#        enabled: true
+#  cloud:
+#    config:
+#      uri: http://localhost:9001
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: '*'
+    routes:
+      enabled: true
+    filters:
+      enabled: true
+
+#zuul:
+#  routes:
+#    myserver_mypath:
+#      path: /mypath/**
+#      serviceId: myserver
+#    myserver_another_path:
+#      path: /anotherpath/**
+#      serviceId: myserver
+
+zuul:
+#  ignoredServices: "*"
+  routes:
+    user:
+      path: /**
+#      url: http://localhost:9002
+      serviceId: user
+#    retryable: true
+
+#ribbon:
+#  ReadTimeout: 60000
+#  ConnectTimeout: 20000
+#  eureka:
+#    enabled: false
+#
+user:
+  ribbon:
+#    NIWSServerListClassName: 'com.netflix.loadbalancer.ConfigurationBasedServerList'
+    listOfServers: http://localhost:9002,http://localhost:9003
+    eureka.enabled: false
+    ServerListRefreshInterval: 100
+    retryableStatusCodes: 500
+    MaxAutoRetries: 2
+    MaxAutoRetriesNextServer: 1
+    OkToRetryOnAllOperations: true
+    ReadTimeout: 10000
+    ConnectTimeout: 10000
+    EnablePrimeConnections: true
+
+#hystrix:
+#  command:
+#    default:
+#      execution:
+#        isolation:
+#          thread:
+#            timeoutInMilliseconds: 60000
+

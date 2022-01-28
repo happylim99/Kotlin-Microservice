@@ -1,0 +1,43 @@
+server:
+  port: 9002
+  error:
+    includeStackTrace: never
+
+eureka:
+  client:
+    registerWithEureka: true
+    fetchRegistry: true
+    serviceUrl:
+      defaultZone: http://localhost:9000/eureka
+
+spring:
+  application:
+    name: user-service
+  datasource:
+    jdbcUrl: jdbc:mysql://localhost:3306/auth_service
+    username: auth_service
+    password: '@Auth123511'
+  jpa:
+    hibernate:
+      ddlAuto: update
+
+#hibernate:
+#  enable_lazy_load_no_trans: true
+
+## Security
+secret:
+  token: secret.token
+
+## gmail
+gmail:
+  smtp_host: smtp.gmail.com
+  smtp_port: 587
+  smtp_username: tianhui3010@gmail.com
+  smtp_password: gdzdlsmghxsttadm
+  smtp_sender: tianhui3010@gmail.com
+#  smtp_properties:
+#    mail:
+#      smtp:
+#        auth: true
+#        starttls:
+#          enable: true

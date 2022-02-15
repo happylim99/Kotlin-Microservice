@@ -1,0 +1,6 @@
+encrypt:
+  key: abcde
+#  key-store:
+#    location: file:///C:/ConfigServer/encryptionKey.jks
+#    password: abcdef
+#    alias: encryptionKey

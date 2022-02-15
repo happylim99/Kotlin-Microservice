@@ -1,5 +1,5 @@
 server:
-  port: 9002
+  port: 9003
   error:
     includeStackTrace: never
 
@@ -13,13 +13,23 @@ eureka:
 spring:
   application:
     name: user-service
-  datasource:
-    jdbcUrl: jdbc:mysql://localhost:3306/auth_service
-    username: auth_service
-    password: '@Auth123511'
+#  datasource:
+#    jdbcUrl: jdbc:mysql://localhost:3306/auth_service
+#    username: auth_service
+#    password: '@Auth123511'
   jpa:
     hibernate:
       ddlAuto: update
+  rabbitmq:
+    host: localhost
+    port: 5672
+    username: guest
+    password: guest
+  cloud:
+    bus:
+      enabled: true
+      refresh:
+        enabled: true
 
 #hibernate:
 #  enable_lazy_load_no_trans: true

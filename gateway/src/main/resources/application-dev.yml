@@ -14,14 +14,20 @@ eureka:
 
 spring:
   application:
-    name: 'spring cloud'
+    name: 'api-gateway'
   cloud:
     gateway:
+      discovery.locator:
+        enabled: true
+#        lower_case_service_id: true
+        lowerCaseServiceId: true
       routes:
-        - id: userService
+        - id: user-service
           uri: lb://user-service
           predicates:
-            - Path=/**
+            - Path=/user-service/**
+#          filters:
+#            - PrefixPath=/aa
 #          filters:
 #            - name: Retry
 #              args:
@@ -40,6 +46,34 @@ spring:
 #          uri: http://localhost:9003
 #          predicates:
 #            - Path=/userService/**
+    bus:
+      enabled: true
+      refresh:
+        enabled: true
+  rabbitmq:
+    host: localhost
+    port: 5672
+    username: guest
+    password: guest
+
+management:
+  endpoint:
+    gateway:
+      enabled: true
+  endpoints:
+    web:
+      exposure:
+        include: '*'
+#        include: beans, health, httptrace, info, routes
+
+#logging:
+#  level:
+#    reactor:
+#      netty: DEBUG
+#    org:
+#      springframework:
+#        cloud:
+#          gateway: DEBUG
 
 
 #user-service:

@@ -34,6 +34,10 @@ dependencies {
 	implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:1.2.2")
 	implementation("com.fasterxml.jackson.core:jackson-databind:2.12.5")
 	implementation("org.springframework.cloud:spring-cloud-starter-netflix-eureka-client")
+	implementation("org.springframework.cloud:spring-cloud-starter-config")
+	implementation("org.springframework.cloud:spring-cloud-starter-bootstrap")
+	implementation("org.springframework.cloud:spring-cloud-starter-bus-amqp")
+	implementation("org.springframework.boot:spring-boot-starter-actuator")
 
 	implementation(project(":base"))
 	implementation(project(":jpa"))

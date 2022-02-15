@@ -1,0 +1,33 @@
+server:
+  port: 9002
+
+spring:
+  application:
+    name: config-server
+  cloud:
+    config:
+      server:
+        native:
+          search-locations: file:///C:/ConfigServer
+#        git:
+#          uri: https://github.com/happylim99/ConfigServer
+#          default-label: master
+#          username: happylim99@gmail.com
+#          password: I0baobeizhu99
+#          clone-on-start: true
+    bus:
+      enabled: true
+      refresh:
+        enabled: true
+  rabbitmq:
+    host: localhost
+    port: 5672
+    username: guest
+    password: guest
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: bus-refresh
+

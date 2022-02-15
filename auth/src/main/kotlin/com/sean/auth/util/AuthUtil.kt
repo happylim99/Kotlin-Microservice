@@ -7,6 +7,7 @@ import com.fasterxml.jackson.databind.ObjectMapper
 import com.sean.auth.config.security.SecurityConst
 import com.sean.auth.entity.Role
 import com.sean.base.ext.asMap
+import org.springframework.core.env.Environment
 import org.springframework.http.HttpStatus
 import org.springframework.stereotype.Component
 import java.util.*
@@ -15,7 +16,8 @@ import javax.servlet.http.HttpServletResponse
 
 @Component
 class AuthUtil(
-    private val mapper: ObjectMapper
+    private val mapper: ObjectMapper,
+    private val env: Environment
 ) {
 
     fun decodeJwt(request: HttpServletRequest, response: HttpServletResponse): DecodedJWT {
@@ -31,6 +33,7 @@ class AuthUtil(
         val role = Role(Role.RoleName.user.name)
         user?.roles?.add(role)
         val userStr = mapper.writeValueAsString(user)
+        println(env.getProperty("secret.token"))
         return JWT.create()
             .withSubject(username)
             .withExpiresAt(Date(System.currentTimeMillis() + SecurityConst.TOKEN_EXPIRATION_TIME))
@@ -85,6 +88,6 @@ class AuthUtil(
         }
     }
 
-    fun algorithm() = Algorithm.HMAC512(SecurityConst.getSecretToken())
+    fun algorithm() = Algorithm.HMAC512(env.getProperty("secret.token"))
 
 }

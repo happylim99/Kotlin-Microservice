@@ -19,7 +19,7 @@ object SecurityConst {
 //        return appProp.getSecretToken()
 //    }
 
-    fun getSecretToken() =
-        (SpringContext.getBean("AppProperty") as AppProperty).getSecretToken()
+//    fun getSecretToken() =
+//        (SpringContext.getBean("AppProperty") as AppProperty).getSecretToken()
 
 }

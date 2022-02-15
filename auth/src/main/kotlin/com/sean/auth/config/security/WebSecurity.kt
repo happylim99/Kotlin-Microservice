@@ -1,7 +1,6 @@
 package com.sean.auth.config.security
 
 import org.springframework.context.annotation.Configuration
-import org.springframework.context.annotation.EnableAspectJAutoProxy
 import org.springframework.http.HttpMethod
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder
 import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity
@@ -13,6 +12,9 @@ import org.springframework.security.config.http.SessionCreationPolicy
 import org.springframework.security.core.userdetails.UserDetailsService
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter
+import org.springframework.security.web.util.matcher.RequestMatcher
+import javax.servlet.http.HttpServletRequest
+
 
 @Configuration
 @EnableWebSecurity
@@ -28,8 +30,14 @@ class WebSecurity(
     }
 
     override fun configure(http: HttpSecurity) {
+//        http.authorizeRequests()
+//            .antMatchers("/**").hasIpAddress("192.168.0.7")
         http.csrf().disable().authorizeRequests()
-//            .antMatchers(HttpMethod.POST,"/user/register")
+            .requestMatchers(checkPort(9005)).authenticated()
+            .antMatchers("/**")
+//            .hasIpAddress("192.168.0.7")
+//            .access("hasIpAddress(\"127.0.0.1\") or hasIpAddress(\"::1\")")
+            .access("hasIpAddress(\"127.0.0.1\") or hasIpAddress(\"::1\")")
 //            .permitAll()
             .anyRequest().authenticated()
             .and()
@@ -51,6 +59,11 @@ class WebSecurity(
             it.ignoring()
                 .antMatchers(HttpMethod.POST,"/user/register")
                 .antMatchers(HttpMethod.GET,"/user/refreshToken")
+                .antMatchers(HttpMethod.GET,"/monitoring/endpoints")
         }
+    }
+
+    private fun checkPort(port: Int): RequestMatcher? {
+        return RequestMatcher { request: HttpServletRequest -> port == request.localPort }
     }
 }

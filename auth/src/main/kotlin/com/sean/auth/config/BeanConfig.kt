@@ -1,6 +1,7 @@
 package com.sean.auth.config
 
 import com.sean.auth.apicomm.FeignErrorDecoder
+import com.sean.auth.apicomm.UserServiceClientImpl
 import com.sean.auth.apicomm.UserServiceFallback
 import com.sean.auth.apicomm.UserServiceFallbackFactory
 import feign.Logger
@@ -22,8 +23,8 @@ class BeanConfig {
     @Bean
     fun feignErrorDecoder() = FeignErrorDecoder()
 
-//    @Bean
-//    fun userServiceFallback() = UserServiceFallback()
+    @Bean
+    fun userServiceClientImpl() = UserServiceClientImpl()
 
     @Bean
     fun userServiceFallbackFactory() = UserServiceFallbackFactory()

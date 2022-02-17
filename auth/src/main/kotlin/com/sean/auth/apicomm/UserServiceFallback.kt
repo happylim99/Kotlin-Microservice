@@ -5,9 +5,15 @@ import com.sean.base.annotation.Slf4j.Companion.log
 import feign.FeignException
 import org.springframework.web.server.ResponseStatusException
 
-class UserServiceFallback(
-    private val cause: Throwable?
-): UserServiceClient {
+class UserServiceFallback: UserServiceClient {
+
+    private lateinit var cause: Throwable
+
+    constructor(
+        cause: Throwable?
+    ) {
+        this.cause = cause!!
+    }
 
     override fun getUserWSUser(uid: String): UserRes {
 //        println("${(cause as ResponseStatusException).status}")

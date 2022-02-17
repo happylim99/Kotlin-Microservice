@@ -6,13 +6,13 @@ import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.PathVariable
 
 // pure fall back
-//@FeignClient(name = "user-ws", fallback = UserServiceFallback::class)
+@FeignClient(name = "user-wss", fallback = UserServiceClientImpl::class)
 
 // fallback with factory
-@FeignClient(name = "user-ws", fallbackFactory = UserServiceFallbackFactory::class)
+//@FeignClient(name = "user-ws", fallbackFactory = UserServiceFallbackFactory::class)
 interface UserServiceClient {
 
-    @GetMapping("/ll/user/{uid}")
+    @GetMapping("/user/{uid}")
     fun getUserWSUser(@PathVariable uid: String): UserRes
 
 }

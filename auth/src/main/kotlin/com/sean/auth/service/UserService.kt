@@ -16,4 +16,5 @@ interface UserService: UserDetailsService, Crud<UserRes, UserCrtReq, UserUptReq>
     fun findByEmail(email: String): User?
     fun findByEmailReturnUserRes(email: String): UserRes?
     fun refreshToken(request: HttpServletRequest, response: HttpServletResponse)
+    fun getUserServiceUser(uid: String): UserRes?
 }

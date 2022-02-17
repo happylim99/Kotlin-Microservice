@@ -47,6 +47,31 @@ class JpaConfig(
     @Bean
     fun transactionManager() = JpaTransactionManager(entityManagerFactory().`object`!!)
 
+    private fun properties(): HashMap<String, Any> {
+        var prop = HashMap<String, Any>()
+        var ddlAuto = env.getProperty("spring.jpa.hibernate.ddl-auto")
+        if(ddlAuto.isNullOrBlank() || ddlAuto.contains("create", ignoreCase = true)) {
+            ddlAuto = "update"
+        }
+        prop["hibernate.hbm2ddl.auto"] = ddlAuto as Any
+        var dialect = env.getProperty("hibernate.dialect")
+        if(dialect.isNullOrBlank()) {
+            dialect = "org.hibernate.dialect.MySQL5InnoDBDialect"
+        }
+        prop["spring.jpa.database-platform"] = dialect as Any
+        prop["hibernate.physical_naming_strategy"] =
+            CamelCaseToUnderscoresNamingStrategy::class.java.name as Any
+        prop["hibernate.implicit_naming_strategy"] =
+            SpringImplicitNamingStrategy::class.java.name as Any
+        var lazyLoad = env.getProperty("hibernate.enable_lazy_load_no_trans")
+        if(lazyLoad.isNullOrBlank()) {
+            lazyLoad = "false"
+        }
+        prop["hibernate.enable_lazy_load_no_trans"] = lazyLoad as Any
+        return prop
+    }
+
+    /*
     private fun properties(): HashMap<String, Object> {
         var prop = HashMap<String, Object>()
         var ddlAuto = env.getProperty("spring.jpa.hibernate.ddl-auto")
@@ -70,4 +95,6 @@ class JpaConfig(
         prop["hibernate.enable_lazy_load_no_trans"] = lazyLoad as Object
         return prop
     }
+     */
+
 }

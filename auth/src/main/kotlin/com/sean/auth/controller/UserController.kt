@@ -82,6 +82,9 @@ class UserController @Autowired constructor(
         return ResponseEntity.ok(yodaRepo.yodaSayFindUserByUid(askYoda))
     }
 
+    @GetMapping("/user-service/{uid}")
+    fun getUserServiceUser(@PathVariable uid: String) = ResponseEntity.ok(srv.getUserServiceUser(uid))
+
 //    @GetMapping("/testUser/{uid}")
 //    fun testUser(@PathVariable uid: String): ResponseEntity<List<TestUser>?> {
 //        return ResponseEntity.ok(testSrv.testFindByUid(uid))

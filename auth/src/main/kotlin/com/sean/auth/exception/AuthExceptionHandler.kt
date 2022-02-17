@@ -19,9 +19,9 @@ class AuthExceptionHandler {
         return ResponseEntity(errorMessage, HttpHeaders(), HttpStatus.INTERNAL_SERVER_ERROR)
     }
 
-    @ExceptionHandler(value = [Exception::class])
-    fun handleOtherException(ex: Exception, request: WebRequest?): ResponseEntity<Any?>? {
-        val errorMessage = ErrorMsg(msg = ex.message!!)
-        return ResponseEntity(errorMessage, HttpHeaders(), HttpStatus.INTERNAL_SERVER_ERROR)
-    }
+//    @ExceptionHandler(value = [Exception::class])
+//    fun handleOtherException(ex: Exception, request: WebRequest?): ResponseEntity<Any?>? {
+//        val errorMessage = ErrorMsg(msg = ex.message!!)
+//        return ResponseEntity(errorMessage, HttpHeaders(), HttpStatus.INTERNAL_SERVER_ERROR)
+//    }
 }

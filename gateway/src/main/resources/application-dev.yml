@@ -22,7 +22,11 @@ spring:
 #        lower_case_service_id: true
         lowerCaseServiceId: true
       routes:
-        - id: user-service
+        - id: auth-ws
+          uri: lb://auth-service
+          predicates:
+            - Path=/auth-service/**
+        - id: user-ws
           uri: lb://user-service
           predicates:
             - Path=/user-service/**

@@ -12,7 +12,7 @@ eureka:
 
 spring:
   application:
-    name: user-service
+    name: auth-ws
 #  datasource:
 #    jdbcUrl: jdbc:mysql://localhost:3306/auth_service
 #    username: auth_service
@@ -51,3 +51,16 @@ gmail:
 #        auth: true
 #        starttls:
 #          enable: true
+
+logging:
+  level:
+    com.sean.auth.apicomm.user_ws.UserServiceClient: DEBUG
+
+feign:
+  client:
+    config:
+      default:
+        errorDecoder: com.sean.auth.apicomm.FeignErrorDecoder
+        loggerLevel: BASIC
+  circuitbreaker:
+    enabled: true

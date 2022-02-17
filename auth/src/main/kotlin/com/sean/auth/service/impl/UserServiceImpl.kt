@@ -1,8 +1,8 @@
 package com.sean.auth.service.impl
 
 import com.fasterxml.jackson.databind.ObjectMapper
+import com.sean.auth.apicomm.UserServiceClient
 import com.sean.auth.config.security.SecurityConst
-import com.sean.auth.controller.UserController
 import com.sean.auth.entity.User
 import com.sean.auth.repo.RoleRepo
 import com.sean.auth.repo.UserDto2
@@ -44,7 +44,9 @@ class UserServiceImpl @Autowired constructor(
     private val bcrypt: BCryptPasswordEncoder,
     private val mapper: ObjectMapper,
     private val authUtil: AuthUtil,
-    private val yodaRepo: YodaRepo
+    private val yodaRepo: YodaRepo,
+//    private val restTemplate: RestTemplate
+    private val userSrvClient: UserServiceClient
 ): BaseSrv<User, UserRepo>(
 
 ), UserService {
@@ -251,6 +253,27 @@ class UserServiceImpl @Autowired constructor(
         return org.springframework.security.core.userdetails.User(
             user?.email, user?.password, authorities
         )
+    }
+
+    override fun getUserServiceUser(uid: String): UserRes? {
+        /*
+        val reqUrl = String.format("http://USER-SERVICE/user/%s", uid)
+        val res = restTemplate.exchange(
+            reqUrl,
+            HttpMethod.GET,
+            null,
+            object: ParameterizedTypeReference<UserRes> () {}
+        )
+        return res.body
+         */
+        return userSrvClient.getUserWSUser(uid)
+//        var res: UserRes? = null
+//        try {
+//            res = userSrvClient.getUserWSUser(uid)
+//        } catch(e: FeignException) {
+//            log.error("${e.localizedMessage}")
+//        }
+//        return res
     }
 
     private fun validateCrtRequireField(req: UserCrtReq): Boolean {

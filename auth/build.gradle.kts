@@ -44,7 +44,9 @@ dependencies {
 	implementation("org.springframework.cloud:spring-cloud-starter-openfeign")
 //	implementation("org.springframework.cloud:spring-cloud-starter-netflix-hystrix")
 	implementation("org.springframework.cloud:spring-cloud-starter-circuitbreaker-reactor-resilience4j")
-	implementation("org.springframework.cloud:spring-cloud-sleuth-zipkin")
+
+	// zipkin not working
+//	implementation("org.springframework.cloud:spring-cloud-sleuth-zipkin")
 
 //	implementation("org.springframework.cloud:spring-cloud-starter-netflix-hystrix:2.2.10.RELEASE")
 //	implementation("io.github.resilience4j:resilience4j-spring-boot2:1.7.1")

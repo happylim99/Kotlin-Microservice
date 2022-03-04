@@ -1,0 +1,21 @@
+version: '1.0'
+services:
+  config-server:
+    container_name: api_gateway
+    image: "api_gateway:latest"
+    build: .
+    ports:
+      - "9001:9001"
+    networks:
+      spring-network:
+        ipv4_address: 172.20.0.5
+    environment:
+      - spring.cloud.config.uri=172.20.0.3:9002
+      - spring.rabbitmq.host=172.20.0.2
+      - eureka.client.serviceUrl.defaultZone=http://172.20.0.4:9000/eureka
+
+networks:
+  spring-network:
+    external: true
+
+

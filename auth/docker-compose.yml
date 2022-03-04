@@ -1,0 +1,23 @@
+version: '1.0'
+services:
+  config-server:
+    container_name: auth_ws
+    image: "auth_ws:latest"
+    build: .
+    ports:
+      - "9003:9003"
+    networks:
+      spring-network:
+        ipv4_address: 172.20.0.6
+    environment:
+      - spring.cloud.config.uri=http://172.20.0.3:9002
+      - spring.rabbitmq.host=172.20.0.2
+      - eureka.client.serviceUrl.defaultZone=http://172.20.0.4:9000/eureka
+    volumes:
+      - C:/logs:/opt/app/logs
+
+networks:
+  spring-network:
+    external: true
+
+

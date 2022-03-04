@@ -8,8 +8,10 @@ spring:
     config:
       server:
         native:
-          search-locations: file:///C:/ConfigServer
-#        git:
+#          search-locations: file:///C:/ConfigServer
+          search-locations: /opt/app/config
+
+    #        git:
 #          uri: https://github.com/happylim99/ConfigServer
 #          default-label: master
 #          username: happylim99@gmail.com

@@ -58,6 +58,7 @@ class JpaConfig(
         if(dialect.isNullOrBlank()) {
             dialect = "org.hibernate.dialect.MySQL5InnoDBDialect"
         }
+//        prop["hibernate.dialect"] = dialect as Any
         prop["spring.jpa.database-platform"] = dialect as Any
         prop["hibernate.physical_naming_strategy"] =
             CamelCaseToUnderscoresNamingStrategy::class.java.name as Any

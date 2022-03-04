@@ -1,0 +1,8 @@
+secret:
+  token: secret.token
+
+spring:
+  datasource:
+    jdbcUrl: jdbc:mysql://localhost:3306/auth_service
+    username: auth_service
+    password: '{cipher}7a39aa90f1a389348ae88f3f3302c788d9f999b81c8dcd5fb19efc82f6843e46'

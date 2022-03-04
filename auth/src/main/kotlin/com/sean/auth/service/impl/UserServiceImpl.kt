@@ -266,6 +266,7 @@ class UserServiceImpl @Autowired constructor(
         )
         return res.body
          */
+        log.info("before calling user-ws")
         return userSrvClient.getUserWSUser(uid)
 //        var res: UserRes? = null
 //        try {
@@ -291,5 +292,9 @@ class UserServiceImpl @Autowired constructor(
             return true
         }
         return false
+    }
+
+    private fun aa() {
+
     }
 }

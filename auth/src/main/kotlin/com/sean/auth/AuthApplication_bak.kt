@@ -41,9 +41,9 @@ class AuthApplicationBak {
 //	}
 }
 
-fun main(args: Array<String>) {
-	runApplication<AuthApplication>(*args)
-}
+//fun main(args: Array<String>) {
+//	runApplication<AuthApplication>(*args)
+//}
 
 
 

@@ -1,0 +1,22 @@
+version: '1.0'
+services:
+  config-server:
+    container_name: config_server
+    image: "config_server:latest"
+    build: .
+    ports:
+      - "9002:9002"
+    networks:
+      spring-network:
+        ipv4_address: 172.20.0.3
+    environment:
+      - spring.rabbitmq.host=172.20.0.2
+#      - spring.cloud.config.server.native.search-locations=/opt/app/config
+    volumes:
+      - C:/ConfigServer:/opt/app/config
+
+networks:
+  spring-network:
+    external: true
+
+

@@ -13,8 +13,11 @@ eureka:
 spring:
   application:
     name: auth-ws
-#  datasource:
-#    jdbcUrl: jdbc:mysql://localhost:3306/auth_service
+  datasource:
+    testWhileIdle: true
+    timeBetweenEvictionRunsMillis: 60000
+    validationQuery: SELECT 1
+#    jdbcUrl: jdbc:mysql://host.docker.internal:3306/auth_service
 #    username: auth_service
 #    password: '@Auth123511'
   jpa:
@@ -30,13 +33,17 @@ spring:
       enabled: true
       refresh:
         enabled: true
-  zipkin:
-    base-url: http://localhost:9411
-    sender:
-      type: web
-  sleuth:
-    sampler:
-      probability: 1
+
+
+#  zipkin:
+#    enabled: true
+#    service.name: auth-ws
+#    base-url: http://localhost:9411
+#    sender.type: web
+#  sleuth:
+#    enabled: true
+#    sampler:
+#      probability: 1.0
 
 #hibernate:
 #  enable_lazy_load_no_trans: true
@@ -60,8 +67,12 @@ gmail:
 #          enable: true
 
 logging:
-  level:
-    com.sean.auth.apicomm.user_ws.UserServiceClient: DEBUG
+  file:
+#    name: 'C:\Kotlin Microservice\auth\auth-ws.log'
+    name: '/opt/app/logs/auth-ws.log'
+#  level:
+#    com.sean.auth.apicomm.user_ws.UserServiceClient: DEBUG
+
 
 feign:
   client:

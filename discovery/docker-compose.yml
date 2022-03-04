@@ -1,0 +1,19 @@
+version: '1.0'
+services:
+  config-server:
+    container_name: discovery_server
+    image: "discovery_server:latest"
+    build: .
+    ports:
+      - "9000:9000"
+    networks:
+      spring-network:
+        ipv4_address: 172.20.0.4
+    environment:
+      - spring.cloud.config.uri=172.20.0.3:9002
+
+networks:
+  spring-network:
+    external: true
+
+

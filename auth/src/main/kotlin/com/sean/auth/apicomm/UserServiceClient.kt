@@ -6,7 +6,7 @@ import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.PathVariable
 
 // pure fall back
-@FeignClient(name = "user-wss", fallback = UserServiceClientImpl::class)
+@FeignClient(name = "user-ws", fallback = UserServiceClientImpl::class)
 
 // fallback with factory
 //@FeignClient(name = "user-ws", fallbackFactory = UserServiceFallbackFactory::class)
